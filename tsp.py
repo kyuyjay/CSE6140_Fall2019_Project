@@ -2,7 +2,16 @@ import sys
 import argparse
 import random
 import numpy as np
+
+######## Algorithm Modules ########
+
+# Import your algorithm modules here
+
+# from ALGO_NAME import ALGO_METHOD
+
 from genetic import genetic
+
+######## ################# ########
 
 ######## Command Line Arguments ########
 
@@ -67,6 +76,15 @@ params,cities = read_file(options.file_loc)
 print(params)
 for city in cities:
     print("{} {} {}".format(city.node_id,city.x,city.y))
+
+#### Algorithms ####
+
+# Return the trace, quality, and route
+# trace,quality,route = ALGO_METHOD(arg_1,arg_2,...)
+# Trace: Array of best results found [[timestamp_1,quality_1],[timestamp_2,quality_2],...]
+# Quality: Overall shortest tour found
+# Route: Array of node_ids in order of travel [node_1,node_2,...]
+
 if options.method == "BnB":
     # TODO
     pass
@@ -78,6 +96,8 @@ elif options.method == "LS1":
     pass
 elif options.method == "LS2":
     trace,quality,route = genetic(params,cities,options.cutoff)
+
+#### ########## ####
 
 print(quality)
 for id in route:
