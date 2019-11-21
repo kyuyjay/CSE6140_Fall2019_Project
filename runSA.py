@@ -3,6 +3,17 @@ import pandas as pd
 import numpy as np
 import SA
 
+"""
+It is for the simulated annealing algorithm. 
+$ python runSA.py
+or run directly from IDE, no argument parse needed. 
+Functional steps in this file:
+1. Read files from DATA/
+2. process it to numpy array
+3. pass numpy array to SA.py, return the shortest distance
+4. write the city name(from DATA/file name) and the shortest distance in the result/SA.csv file
+5. This is one time run, it may need multiple runs to generate average results. 
+"""
 
 def findHeader(filename):
     with open(filename, "r") as f:

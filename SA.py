@@ -2,6 +2,16 @@ import numpy as np
 import math
 import random
 
+"""
+Simulated Annealing algorithm
+input object format: np.array with 3 columns:
+point_index, x_pos, y_pos
+example:
+[['1' 37252471.0 -79951871.0]
+ ['2' 37279602.0 -79935901.0]
+ ['3' 37265971.0 -79945038.0]...]
+"""
+
 
 class SimulatedAnnealing(object):
     def __init__(self, all_points):
