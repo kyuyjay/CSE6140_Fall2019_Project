@@ -1,15 +1,15 @@
 import sys
 import argparse
 import random
+import time
 import numpy as np
 
 ######## Algorithm Modules ########
 
 # Import your algorithm modules here
 
-# from ALGO_NAME import ALGO_METHOD
-
-from genetic import genetic
+import genetic
+import SA
 
 ######## ################# ########
 
@@ -23,19 +23,6 @@ parser.add_argument("-seed")
 options = parser.parse_args()
 
 ######## ###################### ########
-
-######## Classes #########
-
-class City:
-    def __init__(self,node_id,x,y):
-        self.node_id = node_id
-        self.x = x
-        self.y = y
-
-    def test(self):
-        print("hello")
-
-######## ####### #########
 
 ######## File Functions ########
 
@@ -53,16 +40,18 @@ def read_file(file_loc):
         params["DIMENSION"] = int(params["DIMENSION"])
         for i in range(params["DIMENSION"]):
             line = inst.readline().split()
-            cities.append(City(int(line[0]),float(line[1]),float(line[2])))
+            cities.append([int(line[0]),float(line[1]),float(line[2])])
     return params,cities
 
 def write(trace,quality,route,params,options):
     file_loc = "{}_{}_{}.sol".format(params["NAME"],options.method,options.cutoff)
+    # Write solution file
     with open(file_loc,"w+") as out:
         out.write("{}\n".format(quality))
         for city in route[0:-1]:
             out.write("{} ".format(city))
         out.write("{}\n".format(route[-1]))
+    # Write trace file
     file_loc = "{}_{}_{}.trace".format(params["NAME"],options.method,options.cutoff)
     with open(file_loc,"w+") as out:
         for log in trace:
@@ -72,10 +61,11 @@ def write(trace,quality,route,params,options):
 
 ######## Driver Program ########
 
+start_time = time.time()
 params,cities = read_file(options.file_loc)
 print(params)
 for city in cities:
-    print("{} {} {}".format(city.node_id,city.x,city.y))
+    print("{} {} {}".format(city[0],city[1],city[2]))
 
 #### Algorithms ####
 
@@ -85,6 +75,7 @@ for city in cities:
 # Quality: Overall shortest tour found
 # Route: Array of node_ids in order of travel [node_1,node_2,...]
 
+options.cutoff = options.cutoff - (time.time() - start_time)
 if options.method == "BnB":
     # TODO
     pass
@@ -92,10 +83,14 @@ elif options.method == "Approx":
     # TODO
     pass
 elif options.method == "LS1":
-    # TODO
-    pass
+    s = SA.SimulatedAnnealing(cities)
+    s.anneal()
+    quality = s.best_distance
+    route = cities
+    trace = cities
 elif options.method == "LS2":
-    trace,quality,route = genetic(params,cities,options.cutoff)
+    g = genetic.genetic(params,cities,options.cutoff)
+    trace,quality,route = g.evolve()
 
 #### ########## ####
 
@@ -105,5 +100,6 @@ for id in route:
 print("")
 
 write(trace,quality,route,params,options)
+print("Program concluded at time {:.2f}".format(time.time() - start_time))
 
 ######## ############## ########  
