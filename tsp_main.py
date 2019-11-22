@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser(description="TSP")
 parser.add_argument("-inst",dest="file_loc")
 parser.add_argument("-alg",dest="method")
 parser.add_argument("-time",dest="cutoff",type=int)
-parser.add_argument("-seed")
+parser.add_argument("-seed",dest="seed",type=int)
 options = parser.parse_args()
 
 ######## ###################### ########
@@ -62,6 +62,7 @@ def write(trace,quality,route,params,options):
 ######## Driver Program ########
 
 start_time = time.time()
+random.seed(options.seed)
 params,cities = read_file(options.file_loc)
 print(params)
 for city in cities:
