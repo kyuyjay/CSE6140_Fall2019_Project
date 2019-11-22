@@ -34,11 +34,24 @@ def read_file(filename):
     return np_df
 
 
+# def convert_route(arr):
+#     best_route = ''
+#     for i in range(arr.shape[0]):
+#         best_route += arr[i, 0]
+#         if i != arr.shape[0]-1:
+#             best_route += ' -> '
+#     return best_route
+
+
 def apply_annealing(df):
     # Call SA algorithm
-    s = SA.SimulatedAnnealing(df)
+    # arg1: np array; arg2: cooling rate, default is 0.001
+    s = SA.SimulatedAnnealing(df, 0.001)
     s.anneal()
-    return s.best_distance
+    shortest_distance = s.best_distance
+    best_route = s.best_route
+    trace = s.trace
+    return shortest_distance, best_route, trace
 
 
 def main():
@@ -50,13 +63,17 @@ def main():
     for file in glob.glob('DATA/*.tsp'):
         city = os.path.basename(file).split('.')[0]
         df = read_file(file)
-        result = apply_annealing(df)
-        result = int(round(result))
+        shortest_dist, best_route, trace = apply_annealing(df)
+        shortest_dist = int(round(shortest_dist))
+
         print('{} is processed!'.format(file))
-        print('The shortest distance for {} is {}. \n'.format(city, result))
+        print('The shortest distance for {} is {}.'.format(city, shortest_dist))
+        print('The best route is: \n {}'.format(best_route))
+        print('Trace: {} \n'.format(trace))
+
         # write the result
         with open('results/SA.csv', "a+") as out:
-            out.write("{}, {}\n".format(city, result))
+            out.write("{}, {}\n".format(city, shortest_dist))
 
 
 if __name__ == "__main__":

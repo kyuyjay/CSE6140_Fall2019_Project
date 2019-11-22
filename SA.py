@@ -1,6 +1,6 @@
 import numpy as np
-import math
-import random
+import math, random, time
+
 
 """
 Simulated Annealing algorithm
@@ -10,16 +10,22 @@ example:
 [['1' 37252471.0 -79951871.0]
  ['2' 37279602.0 -79935901.0]
  ['3' 37265971.0 -79945038.0]...]
+ 
+cooling rate default is 0.001
+It will enable the algorithm running for 100 times. 
+It can be also passed via arguments. 
 """
 
 
 class SimulatedAnnealing(object):
-    def __init__(self, all_points):
+    def __init__(self, all_points, cooling_rate=0.001):
         self.all_points = all_points
         self.Temp = 10000
-        self.cooling_rate = 0.0005
+        self.cooling_rate = cooling_rate
         self.best_solution = None
         self.best_distance = float("inf")
+        self.best_route = []
+        self.trace = []
 
     def initial_solution(self):
         """
@@ -73,6 +79,15 @@ class SimulatedAnnealing(object):
         else:
             return math.exp((curr_dist - new_dist)/self.Temp)
 
+    def convert_route(self, arr):
+        best_route = []
+        for i in range(arr.shape[0]):
+            best_route.append(arr[i, 0])
+        return best_route
+
+    # def get_best_route(self):
+    #     return self.convert_route(self.best_solution)
+
     def anneal(self):
         """
         :return: Annealing till cool down, update the best_solution
@@ -80,6 +95,7 @@ class SimulatedAnnealing(object):
         # Random initiate the current solution and best solution
         current_solution = self.initial_solution()
         self.best_solution = np.copy(current_solution)
+        start_time = time.time()
 
         while self.Temp > 1:
             # get new solution by swap two points in the current solution
@@ -97,6 +113,11 @@ class SimulatedAnnealing(object):
                 if self.get_distance(current_solution) < self.get_distance(self.best_solution):
                     self.best_solution = current_solution
                     self.best_distance = int(round(self.get_distance(self.best_solution)))
+                    self.best_route = self.convert_route(self.best_solution)
+                    # calculate time
+                    current_time = time.time()
+                    elapsed = current_time - start_time
+                    self.trace.append([elapsed, self.best_distance])
 
             self.Temp *= (1-self.cooling_rate)
 

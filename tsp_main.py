@@ -84,11 +84,11 @@ elif options.method == "Approx":
     # TODO
     pass
 elif options.method == "LS1":
-    s = SA.SimulatedAnnealing(cities)
+    s = SA.SimulatedAnnealing(cities, 0.001)  # the second argument is the cooling rate, default is 0.001.
     s.anneal()
     quality = s.best_distance
-    route = cities
-    trace = cities
+    route = s.best_route
+    trace = s.trace
 elif options.method == "LS2":
     g = genetic.genetic(params,cities,options.cutoff)
     trace,quality,route = g.evolve()
@@ -97,7 +97,7 @@ elif options.method == "LS2":
 
 print(quality)
 for id in route:
-    print(id,end=" ")
+    print(id)
 print("")
 
 write(trace,quality,route,params,options)
