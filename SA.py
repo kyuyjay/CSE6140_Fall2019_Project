@@ -37,7 +37,7 @@ class SimulatedAnnealing(object):
 
     def distance_to(self, point1, point2):
         """
-        :return: get the distance from two points
+        :return: get the distance between two points
         """
         distance = 0
         xdist = abs(point1[1] - point2[1])
@@ -80,13 +80,13 @@ class SimulatedAnnealing(object):
             return math.exp((curr_dist - new_dist)/self.Temp)
 
     def convert_route(self, arr):
+        """
+        :return: return a list with the sequenced indexes for each point
+        """
         best_route = []
         for i in range(arr.shape[0]):
             best_route.append(arr[i, 0])
         return best_route
-
-    # def get_best_route(self):
-    #     return self.convert_route(self.best_solution)
 
     def anneal(self):
         """
@@ -112,14 +112,14 @@ class SimulatedAnnealing(object):
                 # if accept the new solution, compare to best solution, decide whether update the best solution
                 if self.get_distance(current_solution) < self.get_distance(self.best_solution):
                     self.best_solution = current_solution
-                    self.best_distance = int(round(self.get_distance(self.best_solution)))
-                    self.best_route = self.convert_route(self.best_solution)
+                    self.best_distance = self.get_distance(self.best_solution)
                     # calculate time
                     current_time = time.time()
                     elapsed = current_time - start_time
                     self.trace.append([elapsed, self.best_distance])
-
             self.Temp *= (1-self.cooling_rate)
+
+        self.best_route = self.convert_route(self.best_solution)
 
 
 
