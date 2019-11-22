@@ -1,24 +1,27 @@
 # CSE 6140 TSP Project (2019 Fall)
 
 ## Group members
-Eric Gastineau <br>
-Jacob Beel <br>
-Yiwen Bu <br>
-Yong Jian Quek <br>
+Eric Gastineau
+Jacob Beel
+Yiwen Bu
+Yong Jian Quek
 
 ## Algorithm implemented
 1. Branch-and-Bound
 2. Heuristics
 3. Local Search: Genetic Algorithm
-4. Local Search: Simulated Annealing Algorithm <br>
+4. Local Search: Simulated Annealing Algorithm
     
-
 ## Usage:
-1. Branch-and-Bound
-2. Heuristics
-3. Genetic Algorithm
-4. Simulated Algorithm <br>
-    SA.py <br>
-    (temporarily) It can be run directly from runSA.py. Result is stored in results/SA.csv
+### Branch-and-Bound
+### Heuristics
+### Genetic Algorithm
+    Implemented in genetic.py and linked to tsp_main.py
+### Simulated Algorithm
+    Implemented in SA.py and linked to tsp_main.py
+    Missing cutoff functionality
+    Missing trace
+    Missing best route
+
 
 
