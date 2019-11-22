@@ -96,7 +96,7 @@ class SimulatedAnnealing(object):
                 # if accept the new solution, compare to best solution, decide whether update the best solution
                 if self.get_distance(current_solution) < self.get_distance(self.best_solution):
                     self.best_solution = current_solution
-                    self.best_distance = self.get_distance(self.best_solution)
+                    self.best_distance = int(round(self.get_distance(self.best_solution)))
 
             self.Temp *= (1-self.cooling_rate)
 
