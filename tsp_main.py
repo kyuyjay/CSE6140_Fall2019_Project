@@ -85,7 +85,7 @@ elif options.method == "Approx":
     pass
 elif options.method == "LS1":
     s = SA.SimulatedAnnealing(cities, 0.001)  # the second argument is the cooling rate, default is 0.001.
-    s.anneal()
+    s.anneal(options.cutoff)
     quality = s.best_distance
     route = s.best_route
     trace = s.trace
@@ -97,7 +97,7 @@ elif options.method == "LS2":
 
 print(quality)
 for id in route:
-    print(id)
+    print(id,end=" ")
 print("")
 
 write(trace,quality,route,params,options)

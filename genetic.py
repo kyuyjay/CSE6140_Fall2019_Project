@@ -118,7 +118,7 @@ class genetic:
                 curr_min = self.mating_pool[0].tour_length
                 best_DNA = self.mating_pool[0]
             if self.cutoff is not None:
-                if (self.cutoff - elapsed) < (gen_time + 5):
+                if (self.cutoff - elapsed) < (gen_time + 2):
                     break
             gen_time = time.time() - gen_start
 

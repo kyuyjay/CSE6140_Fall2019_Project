@@ -85,19 +85,25 @@ class SimulatedAnnealing(object):
         """
         best_route = []
         for i in range(arr.shape[0]):
-            best_route.append(arr[i, 0])
+            best_route.append(int(arr[i, 0]))
         return best_route
 
-    def anneal(self):
+    def anneal(self,cutoff):
         """
         :return: Annealing till cool down, update the best_solution
         """
+        # Program timer
+        start_time = time.time()
+
         # Random initiate the current solution and best solution
         current_solution = self.initial_solution()
         self.best_solution = np.copy(current_solution)
-        start_time = time.time()
+
 
         while self.Temp > 1:
+            # timer for each iteration
+            itr_time = time.time()
+
             # get new solution by swap two points in the current solution
             new_solution = self.swap_points(current_solution)
 
@@ -112,12 +118,18 @@ class SimulatedAnnealing(object):
                 # if accept the new solution, compare to best solution, decide whether update the best solution
                 if self.get_distance(current_solution) < self.get_distance(self.best_solution):
                     self.best_solution = current_solution
-                    self.best_distance = self.get_distance(self.best_solution)
+                    self.best_distance = int(self.get_distance(self.best_solution))
                     # calculate time
                     current_time = time.time()
                     elapsed = current_time - start_time
                     self.trace.append([elapsed, self.best_distance])
+                
             self.Temp *= (1-self.cooling_rate)
+
+            # cutoff the program if the time left to cutoff is less than the time for one more iteration
+            if (cutoff - 0.5 - (time.time() - start_time)) < (time.time() - itr_time):
+                self.best_route = self.convert_route(self.best_solution)
+                return
 
         self.best_route = self.convert_route(self.best_solution)
 
