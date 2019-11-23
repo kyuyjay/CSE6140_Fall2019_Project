@@ -18,12 +18,8 @@ Yong Jian Quek
 ### Genetic Algorithm
     Implemented in genetic.py and linked to tsp_main.py
 ### Simulated Algorithm
-    Implemented in SA.py and linked to tsp_main.py
-    Updated: 
-    added cutoff functionality: cooling rate, default is 0.001. 
-    added trace: In the format of [[elapsed time, best distance so far], []...], not round the time yet. 
-    added best route: the list of index for each point
-    *Please keep the runSA.py temporarily for my testing purpose. It can run directly and you can also see the output for each step. We can remove it before submission. 
+    Implemented in SA.py and linked to tsp_main.py with a default cooling rate of 0.001.
+    runSA kept for testing purposes. To be removed before submission.
     
 
 
