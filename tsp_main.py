@@ -10,6 +10,7 @@ import numpy as np
 
 import genetic
 import SA
+import construction_heuristic
 
 ######## ################# ########
 
@@ -81,8 +82,7 @@ if options.method == "BnB":
     # TODO
     pass
 elif options.method == "Approx":
-    # TODO
-    pass
+    trace, quality, route = construction_heuristic.nearest_neighbor(params, cities)
 elif options.method == "LS1":
     s = SA.SimulatedAnnealing(cities, 0.001)  # the second argument is the cooling rate, default is 0.001.
     s.anneal(options.cutoff)
