@@ -15,6 +15,8 @@ Yong Jian Quek
 ## Usage:
 ### Branch-and-Bound
 ### Heuristics
+    Implemented in construction_heuristics.py and linked to tsp_main.py
+    Missing cutoff functionality
 ### Genetic Algorithm
     Implemented in genetic.py and linked to tsp_main.py
 ### Simulated Algorithm
