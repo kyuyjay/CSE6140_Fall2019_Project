@@ -14,6 +14,7 @@ Yong Jian Quek
     
 ## Usage:
 ### Branch-and-Bound
+    Implemented in BranchAndBound.py and linked to tsp_main.py
 ### Heuristics
     Implemented in construction_heuristics.py and linked to tsp_main.py
     Missing cutoff functionality
