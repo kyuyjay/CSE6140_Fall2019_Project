@@ -11,6 +11,7 @@ import numpy as np
 import genetic
 import SA
 import construction_heuristic
+import BranchAndBound
 
 ######## ################# ########
 
@@ -79,8 +80,12 @@ for city in cities:
 
 options.cutoff = options.cutoff - (time.time() - start_time)
 if options.method == "BnB":
-    # TODO
-    pass
+    branch=BranchAndBound.BranchAndBound(cities,options.cutoff)
+    branch.main()
+    quality = branch.minimum
+    route = branch.bestSolution
+    trace = branch.trace
+    
 elif options.method == "Approx":
     trace, quality, route = construction_heuristic.nearest_neighbor(params, cities)
 elif options.method == "LS1":
