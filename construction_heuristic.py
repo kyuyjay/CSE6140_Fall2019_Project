@@ -5,19 +5,19 @@ import time
 def nearest_neighbor(params, cities, cutoff):
     start_time = time.time()
     best = float('inf')
-    best_path = None
+    best_path = []
     trace = []
 
     cities = [tuple(city) for city in cities]
 
     for city in cities:
-        if cutoff > time.time():
-            return (trace, best, best_path)
         quality, path = _nearest_neighbor(city, params, cities)
         if quality < best:
             best_path = path
             best = quality
             trace.append([round(time.time() - start_time, 2), best])
+        if time.time() - start_time >= cutoff:
+            break
 
     return (trace, best, best_path)
 
@@ -33,6 +33,13 @@ def _nearest_neighbor(start, params, cities):
         visited.add(closest)
         path.append(closest[0])
         quality += dmin
+        current = closest
+    
+    start_x = start[1]
+    start_y = start[2]
+    finish_x = cities[path[-1] - 1][1]
+    finish_y = cities[path[-1] - 1][2]
+    quality += l2_distance(start_x, start_y, finish_x, finish_y)
 
     return (quality, path)
 
