@@ -6,7 +6,8 @@
 \begin{document}
 \title{Report}
 \maketitle
-
+\section{Related work}
+The first time that Branch and Bound was used for the traveling salesman problem was in the work of Little et al[??]. The lower bound was calculated by reducing the matrix of distances ( which means substracting the smallest element of a row for every element of that row and then doing the same for the columns ). The amount of reduction constitutes the lower bound and each time that we choose a new edge, we update the matrix and we reduce again. They found that the computation time grows exponentially.
 \section{Branch And Bound}
 
 \textit{Overview} : \\
@@ -63,4 +64,9 @@ Pseudocode : \\
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
+
+\section{Empirical evaluation}
+
+Before using the Minimum Spanning Tree, we tried to calculate the lower bound with the matrix reduction method. However, this method takes much more time. For instance, with this method we had to wait 10 minutes to have the exact solution for Atlanta.tsp whereas we only need to wait 21 seconds with the Minimum Spanning Tree. Also we can note that we can find the actual results for small datasets ( Atlanta, Cincinnati, UKansasState ) but it fails for bigger datasets. However, we always have a relative error inferior to 20\%. Also, the fact that we store in memory the minimum spanning trees already calculated gives a great boost on our computation time ... to be continued
+
 \end{document}
