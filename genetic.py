@@ -4,12 +4,12 @@ import random
 import numpy as np
 
 class genetic:
-    def __init__(self,params,cities,cutoff):
+    def __init__(self,params,cities,cutoff,pop=250,elite=0.20,mutate=0.05):
         self.hyp = {
                 "N": params["DIMENSION"],
-                "POPULATION": 1000,
-                "ELITIST FACTOR": 0.1,
-                "MUTATION": 0.05,
+                "POPULATION": pop,
+                "ELITIST FACTOR": elite,
+                "MUTATION": mutate,
                 "GENERATIONS": 10000
                 }
         self.hyp["ELITISM"] = int(round(self.hyp["ELITIST FACTOR"] * self.hyp["POPULATION"]))
