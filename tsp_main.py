@@ -78,7 +78,6 @@ for city in cities:
 # Quality: Overall shortest tour found
 # Route: Array of node_ids in order of travel [node_1,node_2,...]
 
-options.cutoff = options.cutoff - (time.time() - start_time)
 if options.method == "BnB":
     branch=BranchAndBound.BranchAndBound(cities,options.cutoff)
     branch.main()
