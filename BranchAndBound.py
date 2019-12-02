@@ -91,8 +91,8 @@ class BranchAndBound:
             return
         if len(path)==len(self.points):
             length=somme+self.distances[path[-1]][path[0]]
-            if length<self.minimum: #if the current solution is better than the global solution, then it becomes the new global solution
-                self.minimum=length
+            if round(length)<self.minimum: #if the current solution is better than the global solution, then it becomes the new global solution
+                self.minimum=int(round(length))
                 self.bestSolution=path.copy()
                 self.trace.append([round(time.time()-self.timestamp,2),int(round(length))])
             return
@@ -114,4 +114,3 @@ class BranchAndBound:
         self.timestamp=time.time() #we begin to count the time now
 
         self.research([0],0)
-        self.minimum=int(round(self.minimum))
