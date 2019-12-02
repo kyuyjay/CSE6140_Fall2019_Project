@@ -63,7 +63,8 @@ class BranchAndBound:
     def branch_bound(self,path): #the kruskal's algorithm to calculate the lower bound
         pathcopy=path[1:-1].copy()
         pathcopy.sort()
-        string = [str(i) for i in pathcopy] 
+        string = [str(i) for i in pathcopy]
+        
         if "".join(string) in self.memory.keys(): #if this MSP has already been calculated, we don't need to calculate it anymore
             return self.memory["".join(string)]
         
@@ -91,9 +92,9 @@ class BranchAndBound:
         if len(path)==len(self.points):
             length=somme+self.distances[path[-1]][path[0]]
             if length<self.minimum: #if the current solution is better than the global solution, then it becomes the new global solution
-                self.minimum=int(length)
+                self.minimum=int(round(length))
                 self.bestSolution=path.copy()
-                self.trace.append([round(time.time()-self.timestamp,2),int(length)])
+                self.trace.append([round(time.time()-self.timestamp,2),int(round(length))])
             return
         for i in range(len(self.points)):
             entier=self.distances_rank[path[-1]][i] #we try firstly the closest points
