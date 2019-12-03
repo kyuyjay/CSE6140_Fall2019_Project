@@ -1,3 +1,18 @@
+###
+# Nearest Neighbor construction heuristic for TSP.
+#
+# Call the function `nearest_neighbor` and supply the
+# parameters as specified in the .tsp files, as well
+# as the list of cities, and a cutoff time.
+#
+# This will return a 3-tuple containing the trace,
+# the quality of the solution, and the best tour.
+#
+# Note this solution tries the nearest neighbor 
+# algoritm from every possible starting city and
+# return the best found trace.
+###
+
 import random
 import math
 import time
