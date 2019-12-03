@@ -67,20 +67,20 @@ Pseudocode : \\
 \\
 
 
-\section{TSP Implementation}
-
-
-
-
-
-
-
+\section{TSP Implementation and design}
+The choice of parameters includes initial temperature ($T_{max}$)
 
 
 
 \section{Complexities}
+Simulated Annealing goes through temperature change $O(logn)$ steps. For each temperatue change, there is a search space $O(n)$ to attempt till accept the new temperature. The rejection for a temperature change cost $O(1)$. If a change is accepted, the average path reversal cost $O(n)$. \\
 
-\section{Design}
+Therefore the total time complexity is $T_n = O((n^2 + n) log n)$. \\
+
+Since There are more steps take place at lower temperature with constant rejection, the $O(nlog)$ is not negligible compare to $O(n^2log)$, we still need to keep it[citation1]. 
+
+
+
 \section{Empirical evaluation}
 \textit{Strength and Weakness} : \\
 
