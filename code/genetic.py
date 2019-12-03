@@ -1,9 +1,19 @@
+###
+# Genetic algorithm to optimize travelling salesman problem.
+# 
+# To initialize algorithm, create a class genetic with the TSP parameters, data,
+# and the required hyperparameters if not using the default.
+#
+# Call genetic.evolve() to run the algorithm. Returns trace, quality, route
+##
+
 import sys
 import time
 import random
 import numpy as np
 
 class genetic:
+    # Main driver class to hold algorithm parameters
     def __init__(self,params,cities,cutoff,pop=250,elite=0.20,mutate=0.05):
         self.hyp = {
                 "N": params["DIMENSION"],
@@ -22,21 +32,25 @@ class genetic:
         for param in self.hyp:
             print("{}: {}".format(param,self.hyp[param]))
 
+    # Each gene represents a location from the TSP data
     class gene:
         def __init__(self,node_id=-1,x=0,y=0):
             self.node_id = node_id
             self.x = x
             self.y = y
 
+        # Calculate the distance from this location to another location
         def distance(self,dest):
             return np.linalg.norm([dest.x - self.x,dest.y - self.y])
 
+    # Each DNA is a valid solution to the TSP problem and is composed of N genes
     class DNA:
         def __init__(self,N,gene_pool):
             self.strand = random.sample(gene_pool,N)
             self.tour_length = 0
             self.N = N
 
+        # Evaluates the tour length of the DNA and returns the recipocal as the solution
         def fitness(self):
             self.tour_length = 0
             for i in range(len(self.strand) - 1):
@@ -44,6 +58,7 @@ class genetic:
             self.tour_length = int(round(self.tour_length + self.strand[-1].distance(self.strand[0])))
             return
 
+        # Mutates each gene by swapping gene positions in the DNA with the given probability
         def mutate(self,N,MUTATION):
             for i in range(len(self.strand)):
                 chance = random.random()
@@ -52,6 +67,7 @@ class genetic:
                     self.strand[i],self.strand[swap] = self.strand[swap],self.strand[i]
             return
 
+    # Create the initial population from the gene pool by generating DNA
     def populate(self):
         for i in range(self.hyp["POPULATION"]):
             self.mating_pool.append(self.DNA(self.hyp["N"],self.gene_pool))
@@ -60,10 +76,12 @@ class genetic:
         self.mating_pool.sort(key=lambda x: x.tour_length)
         return
 
+    # Select 2 parents from the population with a weighted probability
     def select(self):
         parents = random.choices(self.mating_pool,weights=self.weights,k=2)
         return parents
  
+    # Mate two DNA by selecting different portions of them while preserving the validity of the solution
     def crossbreed(self,host,partner):
         N = self.hyp["N"]
         start = random.randrange(0, round((N/2) - 1))
@@ -75,6 +93,7 @@ class genetic:
                 child.strand.append(gene)
         return child
 
+    # Driver method to conduct selection and mating for the whole population
     def survive(self):
         N = self.hyp["N"]
         POPULATION = self.hyp["POPULATION"]
@@ -94,12 +113,14 @@ class genetic:
         self.mating_pool = next_gen
         return
 
+    # Extract quality and route from optimal DNA
     def output(self,DNA):
         route = []
         for gene in DNA.strand:
             route.append(gene.node_id)
         return DNA.tour_length,route
 
+    # Main driver program to run the whole algorithm for a fixed number of generation or until timeout
     def evolve(self):
         start_time = time.time()
         trace =[]
