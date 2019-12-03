@@ -136,42 +136,47 @@ As can be seen from Figure 1, the effect of the population size on the variance 
 \subsubsection{Strengths and Weaknesses}
 A GA is usually known for being able to quickly reach the vicinity of the optimum solution but takes a much longer time reaching the actual optimum. This is due to its probabilistic nature rather than a fixed heuristic. Most implantation of GA is used to reduce the solution space, before another algorithm is used to find the actual optimal solution. This is much akin to evolution, where specific evolutionary traits are determined randomly.
 
-\section{Empirical}
+\section{Empirical Evaluation}
 \subsection{Genetic Algorithm}
+All values in Table 2 were averaged over 10 runs with a cutoff time of 600 seconds.
+Atlanta and NYC were evaluated to produce the following plots.
 \subsubsection{Qualified Runtime}
+See Figure 4 and Figure 5
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth=]{genetic_qrtd_Atlanta.png}
-  \caption{Graph of Tour Length against Population Size for varying hyperparameters}
+  \caption{Qualified Runtimes for Atlanta, q = 0 and q = 0.25}
 \end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{genetic_qrtd_NYC.png}
-  \caption{Graph of Tour Length against Elitism Factor for varying hyperparameters}
+  \caption{Qualified Runtimes for NYC, q = 0.5 and q = 0.6}
 \end{figure}
 
 \subsubsection{Solution Quality Distributions}
+See Figure 6 and Figure 7
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth=]{genetic_sqd_Atlanta.png}
-  \caption{Graph of Tour Length against Population Size for varying hyperparameters}
+  \caption{Solution Quality Distributions for Atlanta, t = 15s, t = 60s and t = 90s}
 \end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{genetic_sqd_NYC.png}
-  \caption{Graph of Tour Length against Elitism Factor for varying hyperparameters}
+  \caption{Solution Quality Distributions for NYC, t = 15s, t = 60s and t = 90s}
 \end{figure}
 
 \subsubsection{Box Plots}
+See Figure 8 and Figure 9
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth=]{genetic_box_Atlanta.png}
-  \caption{Graph of Tour Length against Population Size for varying hyperparameters}
+  \includegraphics[width=5cm]{genetic_box_Atlanta.png}
+  \caption{Box Plot of Runtimes for Altanta, q = 0, t = 300}
 \end{figure}
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{genetic_box_NYC.png}
-  \caption{Graph of Tour Length against Elitism Factor for varying hyperparameters}
+  \includegraphics[width=5cm]{genetic_box_NYC.png}
+  \caption{Box Plot of Runtimes for NYC, q = 6, t = 300}
 \end{figure}
 %%
 %% The next two lines define the bibliography style to be used, and
