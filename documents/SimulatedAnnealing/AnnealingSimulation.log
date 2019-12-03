@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  3 DEC 2019 12:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  3 DEC 2019 14:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -269,11 +269,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
-
- []
-
 [3] (./AnnealingSimulation.aux) ) 
 Here is how much of TeX's memory you used:
  2557 strings out of 492616
@@ -297,7 +292,7 @@ ts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsy8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti12.pfb>
-Output written on AnnealingSimulation.pdf (3 pages, 140740 bytes).
+Output written on AnnealingSimulation.pdf (3 pages, 141476 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream

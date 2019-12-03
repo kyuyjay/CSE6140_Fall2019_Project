@@ -26,6 +26,7 @@ class SimulatedAnnealing(object):
         self.best_distance = float("inf")
         self.best_route = []
         self.trace = []
+        self.duration = 0
 
     def initial_solution(self):
         """
@@ -88,7 +89,7 @@ class SimulatedAnnealing(object):
             best_route.append(int(arr[i, 0]))
         return best_route
 
-    def anneal(self,cutoff):
+    def anneal(self,cutoff=10000):
         """
         :return: Annealing till cool down, update the best_solution
         """
@@ -132,6 +133,9 @@ class SimulatedAnnealing(object):
                 return
 
         self.best_route = self.convert_route(self.best_solution)
+        endtime = time.time()
+        self.duration = endtime - start_time
+
 
 
 
