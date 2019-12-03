@@ -15,7 +15,7 @@ import genetic
 ######## ################# ########
 
 options = {}
-options["cutoff"] = 90
+options["cutoff"] = 10
 options["seed"] = None
 
 ######## ###################### ########
@@ -40,7 +40,7 @@ def read_file(file_loc):
     return params,cities
 
 def write_file(results):
-    with open("results/genetic_final.csv","a") as csvfile:
+    with open("results/genetic_eval_med.csv","a") as csvfile:
         csvwriter = csv.writer(csvfile)
         for row in results:
             csvwriter.writerow(row)
@@ -49,7 +49,7 @@ def write_file(results):
 
 ######## Driver Program ########
 
-trials = 3
+trials = 40
 results = []
 local = []
 
@@ -90,7 +90,33 @@ def cv(results):
                     results.append([p, e/100, m/100, local_time/trials, local_qual/trials])
                     print(results)
 
-runtime(results)
+def qrtd(results):
+    for file_loc in ["DATA/Atlanta.tsp"]:
+        for i in range(trials):
+            temp = []
+            start_time = time.time()
+            random.seed(options["seed"])
+            params,cities = read_file(file_loc)
+            g = genetic.genetic(params,cities,60)
+            trace,quality,route = g.evolve()
+            results.append([quality])
+            print(results)
+
+def qrtd2(results2):
+    for file_loc in ["DATA/NYC.tsp"]:
+        for i in range(trials):
+            temp = []
+            start_time = time.time()
+            random.seed(options["seed"])
+            params,cities = read_file(file_loc)
+            g = genetic.genetic(params,cities,125)
+            trace,quality,route = g.evolve()
+            results2.append([quality])
+            print(results2)
+
+qrtd(results)
+results2 = []
+qrtd2(results)
 write_file(results)
 
 ######## ############## ########  
