@@ -44,6 +44,9 @@ Pseudocode : \\
 \begin{algorithm}
   \caption{Branch and Bound}\label{euclid}
   \begin{algorithmic}[1]
+    \State CalculateAllDistances()
+    \State PrepareKruskal()
+    \State RESEARCH(0)
     \Function{Research}{PartialSolution}
       \If {length(PartialSolution)=N}
 	\State Sum=CalculateSum(PartialSolution)
@@ -64,9 +67,16 @@ Pseudocode : \\
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
-
+ \\
+CalculateAllDistances() is a function that calculate all distances between each pair of points. \\
+PrepareKruskal() is a function that prepares the edges for the Kruskal's algorithm. \\
+CalculateSum is a function that calculate the length of the path of the current solution. \\
+MinimumSpanningTree is a function that calculate the length of the minimum spanning tree of the graph of all cities not in the current partial solution with the first and the last cities of the partial solution.\\
+CalculateSum is a function that calculate the length of the path of the current partial solution. \\
+RankedNeighbors is a function that takes a city as an argument and return all the cities ranked according to their distances to this city. \\
+ 
 \section{Empirical evaluation}
 
-Before using the Minimum Spanning Tree, we tried to calculate the lower bound with the matrix reduction method. However, this method takes much more time. For instance, with this method we had to wait 10 minutes to have the exact solution for Atlanta.tsp whereas we only need to wait 21 seconds with the Minimum Spanning Tree. Also we can note that we can find the actual results for small datasets ( Atlanta, Cincinnati, UKansasState ) but it fails for bigger datasets. However, we always have a relative error inferior to 20\%. Also, the fact that we store in memory the minimum spanning trees already calculated gives a great boost on our computation time. For instance, for Atlanta, I get the optimal solution in 750 seconds without storing the MSTs whereas I can get the solution in 30 seconds with memory. In the same way, for Cincinnati we need to wait 0.27 second without memory and 0.03 with memory. \\
+Before using the Minimum Spanning Tree, we tried to calculate the lower bound with the matrix reduction method. However, this method takes much more time. For instance, with this method we had to wait 10 minutes to have the exact solution for Atlanta.tsp whereas we only need to wait 21 seconds with the Minimum Spanning Tree. Also we can note that we can quickly find the actual results for small datasets ( Atlanta, Cincinnati, UKansasState ) but it fails for bigger datasets. However, we always have a relative error inferior to 20\%. Also, the fact that we store in memory the minimum spanning trees already calculated gives a great boost on our computation time. For instance, for Atlanta, I get the optimal solution in 750 seconds without storing the MSTs whereas I can get the solution in 30 seconds with memory. In the same way, for Cincinnati we need to wait 0.27 second without memory and 0.03 with memory. \\
 
 \end{document}
