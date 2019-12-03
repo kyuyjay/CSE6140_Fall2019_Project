@@ -105,6 +105,5 @@ for id in route:
 print("")
 
 write(trace,quality,route,params,options)
-print("Program concluded at time {:.2f}".format(time.time() - start_time))
 
 ######## ############## ########  
