@@ -40,7 +40,7 @@ class BranchAndBound:
             for j in range(len(points)):
                 result=999999999.0 #if i==j, then we put a huge value so that we don't take this value into account anymore
                 if i!=j:
-                    result=round(self.euclidian(points[i],points[j]),2)
+                    result=self.euclidian(points[i],points[j])
                 dictionary[result]=j #we keep in memomy what was the index for this distance
                 temp.append(result) #we keep in memory this distance
             self.distances.append(temp)
@@ -63,7 +63,8 @@ class BranchAndBound:
     def branch_bound(self,path): #the kruskal's algorithm to calculate the lower bound
         pathcopy=path[1:-1].copy()
         pathcopy.sort()
-        string = [str(i) for i in pathcopy] 
+        string = [str(i) for i in pathcopy]
+        
         if "".join(string) in self.memory.keys(): #if this MSP has already been calculated, we don't need to calculate it anymore
             return self.memory["".join(string)]
         
@@ -81,7 +82,7 @@ class BranchAndBound:
                     for k in trees.keys():
                         if trees[k]==temp1:
                             trees[k]=trees[self.edges[currentEdge][0]] #the union of the trees
-                    total=total+currentEdge
+                    total=total+round(currentEdge)
         self.memory["".join(string)]=total #now that we have calculated the result, we save it so that we don't need to calculate it anymore
         return total
         
@@ -89,7 +90,7 @@ class BranchAndBound:
         if (time.time()-self.timestamp)> self.cutoff:
             return
         if len(path)==len(self.points):
-            length=somme+self.distances[path[-1]][path[0]]
+            length=somme+round(self.distances[path[-1]][path[0]])
             if length<self.minimum: #if the current solution is better than the global solution, then it becomes the new global solution
                 self.minimum=int(length)
                 self.bestSolution=path.copy()
@@ -98,7 +99,7 @@ class BranchAndBound:
         for i in range(len(self.points)):
             entier=self.distances_rank[path[-1]][i] #we try firstly the closest points
             if entier not in path:
-                new_somme=somme+self.distances[path[-1]][entier] #the length of the current path
+                new_somme=somme+round(self.distances[path[-1]][entier]) #the length of the current path
                 path.append(entier)
                 bound=self.branch_bound(path)+new_somme
                 if bound<self.minimum:  #if the lower bound is inferior to the minimum, we expand the new problem
