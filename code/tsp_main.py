@@ -90,7 +90,7 @@ if options.method == "BnB":
 elif options.method == "Approx":
     trace, quality, route = construction_heuristic.nearest_neighbor(params, cities)
 elif options.method == "LS1":
-    s = SA.SimulatedAnnealing(cities, 0.001)  # the second argument is the cooling rate, default is 0.001.
+    s = SA.SimulatedAnnealing(cities, 0.00001)  # the second argument is the cooling rate, default is 0.001.
     s.anneal(options.cutoff)
     quality = s.best_distance
     route = s.best_route
