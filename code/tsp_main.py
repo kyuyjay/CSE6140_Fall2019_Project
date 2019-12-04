@@ -1,4 +1,5 @@
 import sys
+import os
 import argparse
 import random
 import time
@@ -46,7 +47,8 @@ def read_file(file_loc):
     return params,cities
 
 def write(trace,quality,route,params,options):
-    file_loc = "{}_{}_{}.sol".format(params["NAME"],options.method,round(options.cutoff))
+    os.makedirs("output",exist_ok=True)
+    file_loc = "output/{}_{}_{}.sol".format(params["NAME"],options.method,round(options.cutoff))
     # Write solution file
     with open(file_loc,"w+") as out:
         out.write("{}\n".format(quality))
@@ -54,7 +56,7 @@ def write(trace,quality,route,params,options):
             out.write("{},".format(city))
         out.write("{}\n".format(route[-1]))
     # Write trace file
-    file_loc = "{}_{}_{}.trace".format(params["NAME"],options.method,round(options.cutoff))
+    file_loc = "output/{}_{}_{}.trace".format(params["NAME"],options.method,round(options.cutoff))
     with open(file_loc,"w+") as out:
         for log in trace:
             out.write("{:.2f}, {}\n".format(log[0],log[1]))
@@ -88,7 +90,7 @@ if options.method == "BnB":
 elif options.method == "Approx":
     trace, quality, route = construction_heuristic.nearest_neighbor(params, cities, options.cutoff)
 elif options.method == "LS1":
-    s = SA.SimulatedAnnealing(cities, 0.001)  # the second argument is the cooling rate, default is 0.001.
+    s = SA.SimulatedAnnealing(cities, 0.00001)  # the second argument is the cooling rate, default is 0.001.
     s.anneal(options.cutoff)
     quality = s.best_distance
     route = s.best_route
