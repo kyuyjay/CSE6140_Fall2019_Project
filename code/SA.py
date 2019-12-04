@@ -18,7 +18,7 @@ It can be also passed via arguments.
 
 
 class SimulatedAnnealing(object):
-    def __init__(self, all_points, cooling_rate=0.001):
+    def __init__(self, all_points, cooling_rate=0.00001):
         self.all_points = all_points
         self.Temp = 10000
         self.cooling_rate = cooling_rate
