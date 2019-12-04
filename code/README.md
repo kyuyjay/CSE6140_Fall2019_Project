@@ -8,7 +8,7 @@ Yong Jian Quek
 
 ## Description
 Solve a Travelling Salesman Problem using multiple different algorithms. Individual algorithms are implemented in seperate modules that are then called by tsp_main.py.
-All code test on python 3.7.3
+All code tested on python 3.6.0
 
 
 ## Usage:
@@ -19,7 +19,7 @@ python3 tsp_main.py -inst <filename>
 
 ## Dependencies
 numpy    1.17.4
-All other modules part of python 3.7.3 standard library
+All other modules part of python 3.6.0 standard library
 
 ## Algorithm implemented
 1. Branch-and-Bound
