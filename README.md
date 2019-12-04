@@ -53,7 +53,8 @@ All other modules part of python 3.7.3 standard library
     SimulatedAnnealing.best_route returns the route
     SimulatedAnnealing.trace returns the trace 
 #### Hyperparameters
-    Cooling Rate: 0.001
+    Cooling Rate: 0.00001
+    Initial temporature: 10000
     
 
 
